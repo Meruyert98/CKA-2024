@@ -6,11 +6,30 @@
 
 **Task 1**
 - Create a pod using the imperative command and use nginx as the image
+  ```
+  kubectl run nginx --image=nginx
+  ```
 
 **Task2**
 - Create the YAML from the nginx pod created in task 1
 - Update the pod name in the YAML
 - Use that YAML to create a new pod with the name nginx-new.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-new
+  labels:
+    env: demo
+    type: frontend
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+```
 
 **Task3**
 - Apply the below YAML and fix the errors, including all the commands that you run during the troubleshooting and the error message
@@ -28,6 +47,14 @@ spec:
     name: redis
     
 ```
+```bash
+kubectl apply -f pod.yaml
+kubectl get pods
+kubectl describe pod redis
+# find error (errimagepull), change it in yaml file or kubectl edit
+kubectl edit pod redis
+```
+
 2. **Share your learnings**: Document your key takeaways and insights in a blog post and social media update
 3. **Make it public**: Share what you learn publicly on LinkedIn or Twitter.
    - **Tag us and use the hashtag**: Include the following in your post:
